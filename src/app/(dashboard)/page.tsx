@@ -1,9 +1,10 @@
-'use client'
 
-import { useOrganization } from '@clerk/nextjs'
 
-import { EmptyOrg , BoardList} from '@/components/screens/home'
 
+import { Page} from '@/components/screens/home'
+
+
+export const dynamic = 'force-dynamic'
 interface DashboardPageProps {
 	searchParams: {
 		search?: string
@@ -11,18 +12,8 @@ interface DashboardPageProps {
 	}
 }
 
-const DashboardPage = ({ searchParams }: DashboardPageProps) => {
-	const { organization } = useOrganization()
-
-	return (
-		<div className='flex-1 h-[calc(100%-80px)] p-6'>
-			{!organization ? (
-				<EmptyOrg />
-			) : (
-				<BoardList orgId={organization.id} query={searchParams} />
-			)}
-		</div>
-	)
+const DashboardPage = async ({ searchParams }: DashboardPageProps) => {
+	return <Page searchParams={searchParams} />
 }
 
 export default DashboardPage
